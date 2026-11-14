@@ -23,6 +23,7 @@ def plot_reconstruction(path, pts, colors, centers):
     ax = fig.add_subplot(111, projection="3d")
     ax.scatter(*pts[keep].T, c=colors[keep] / 255.0, s=1)
     ax.scatter(*centers.T, c="red", marker="^", s=40, label="cameras")
+    ax.set_box_aspect(np.ptp(pts[keep], axis=0))
     ax.set_xlabel("X"); ax.set_ylabel("Y"); ax.set_zlabel("Z"); ax.legend()
     ax.view_init(elev=-70, azim=-90)  # camera looks down +Z, image y points down
     fig.savefig(path, dpi=150, bbox_inches="tight")
