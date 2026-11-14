@@ -11,3 +11,6 @@ images_synth/
 .DS_Store
 .vscode/
 .idea/
+
+out_*/
+output*/

@@ -30,3 +30,6 @@ Why: project must be our own implementation. Rejected: calling pycolmap inside t
 
 ## D-010 · 2026-11-14 · Sparse reconstruction only (no dense MVS)
 Why: time; syllabus covers epipolar geometry, triangulation, SfM. Rejected: PatchMatch MVS. Affects: scope in PRD.
+
+## D-011 · 2026-11-14 · Lower thresholds for real photos
+Why: real desk photos have low texture, so min matches per pair and min initial-pair points were lowered from 50 to 30, and SIFT contrastThreshold from the default 0.04 to 0.01, to get more features and matches. Trade-off: more noisy matches and slower runs (195 s on 19 photos). Rejected: keeping the defaults. Affects: src/sfm.py, src/features.py.
