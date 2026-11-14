@@ -19,7 +19,7 @@ def read_colmap_centers(path):
     lines = [l for l in open(path) if not l.startswith("#") and l.strip()]
     for l in lines[0::2]:  # every second line is the 2D point list
         p = l.split()
-        q, t, name = np.array(p[1:5], float), np.array(p[5:8], float), p[9]
+        q, t, name = np.array(p[1:5], float), np.array(p[5:8], float), " ".join(p[9:])
         centers[name] = -quat_to_R(q).T @ t
     return centers
 

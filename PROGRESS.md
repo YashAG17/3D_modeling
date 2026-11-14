@@ -1,11 +1,12 @@
 # PROGRESS (overwrite this file, do not append)
 - Last updated: 2026-11-14 by Codex
-- Current task: none in progress. Milestone 1 (T-001..T-010) and T-011 are complete.
-- Just completed: converted `tests/test_geometry.py` into two pytest tests covering robust epipolar geometry, pose recovery, triangulation, and bundle adjustment. `python -m pytest` passes (2 tests); `python -m pyflakes .` passes. The GitHub remote was already configured and synchronized before this task; T-011 changes are being committed and pushed.
-- State of the code: WORKS on synthetic data. NOT yet run on real photos. Tests use pytest. Git repository is connected to `https://github.com/YashAG17/3D_modeling`.
+- Current task: T-012/T-013 remain in progress for the second real dataset. T-014 is complete.
+- Just completed: recorded the supplied desk run (19/19 registered, 5,954 points, 0.61 px mean reprojection error, 195 s) and preserved the three focal-length reconstruction plots. Ran COLMAP 4.2.1 on the same 19 photos: 19/19 registered, 5,412 points, 0.9794 px mean reprojection error, estimated focal 1,064.19 px and k1=-0.02001, about 98 s. Both reconstructions appear bowl-shaped. Camera-centre alignment RMSE is 0.1537 (1.28% of COLMAP scene extent).
+- State of the code: synthetic pipeline tests pass. One real desk dataset is recorded; the second scene dataset is not captured. Real desk and COLMAP results are in `RESULTS.md`; the input photos remain uncommitted in ignored `images/`.
 - Known issues / gotchas:
-  - Real-photo behaviour untested: focal length is guessed (1.2 x max side) unless `--focal` is given.
-  - Own RANSAC is slower than `--fast` (about 9 s vs 6 s on 7 small images; grows quickly with image count).
-  - Exhaustive matching is O(n^2) pairs; use `--window` for sequences.
+  - The desk cloud remains bowl-shaped across our focal initializations and COLMAP's `SIMPLE_RADIAL` reconstruction; the capture pattern is a likely cause, but this comparison does not prove it.
+  - Real-photo behaviour is only validated on the desk dataset; focal length is guessed unless `--focal` is provided.
+  - Own RANSAC took 195 s on the 19-photo desk dataset.
   - Bundle adjustment needs the two-stage (linear then Huber) solve; do not switch back to Huber-only (D-007).
-- Exact next step: T-012 - capture 2 real datasets (15-30 photos each; one object, one scene), same camera, no zoom. Store photos in `images/` and do not commit them.
+  - Pre-existing local edits in `src/features.py`, `src/sfm.py`, and `views.py` were left untouched and unstaged.
+- Exact next step: T-012 - capture a 15-30 photo scene dataset with the same camera and no zoom; keep the photos in `images/` without committing them. Then run the pipeline and add its measured row to `RESULTS.md` to complete T-013.
