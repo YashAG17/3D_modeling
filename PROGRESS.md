@@ -1,12 +1,12 @@
 # PROGRESS (overwrite this file, do not append)
 - Last updated: 2026-11-14 by Codex
-- Current task: T-012/T-013 remain in progress; the South Building public benchmark run is recorded.
-- Just completed: Verified 128 JPGs and the supplied COLMAP model under `images_obj/south-building/`; copied every 4th sorted image into `images_sb/` (32 images); ran Mini-SfM at 1333 px focal length and 1600 px maximum size. It registered 6/32 images, created 5,893 points, had 0.12 px mean reprojection error, and took 177.5 s wall time (174 s reported by the pipeline). The six common camera centres align to 0.0215 RMSE, 0.38% of COLMAP scene extent. Recorded results and the coverage limitation in `RESULTS.md`; ignored the benchmark dataset/sample/output paths.
-- State of the code: No files in `src/` changed. Benchmark outputs are present in ignored `out_sb/`. `python -m tests.test_geometry` passed; Pyflakes passed on repository Python source/test files.
+- Current task: T-012/T-013 remain in progress; both South Building benchmark attempts are recorded.
+- Just completed: Attempt 1 used every 4th sorted image and registered 6/32. Attempt 2 used sorted indices 0, 2, ..., 62 from the first 64 images (32 total), with `--window 6`; it registered 24/32, created 18,898 points, had 0.15 px mean reprojection error, and took 519.7 s wall time (516 s reported by the pipeline). COLMAP comparison found 24 common cameras with 0.0365 camera-centre RMSE, 0.36% of scene extent. The unregistered image names and relevant match/PnP logs are in ignored `out_sb2/registration_diagnostics.txt` and `out_sb2/run.log`. Updated `RESULTS.md` and ignored `images_sb2/`.
+- State of the code: No files in `src/` changed. Outputs are present in ignored `out_sb2/`. `python -m tests.test_geometry`, scoped Pyflakes, and `git diff --check` passed for this attempt.
 - Known issues / gotchas:
-  - South Building registration was 6/32, below the requested 25-image threshold. The camera comparison uses six shared cameras only; COLMAP is a reference model, not laser ground truth.
-  - Consider trying every 3rd image or another `--window` to seek more registered images; no algorithm changes were made.
-  - The system Python lacks OpenCV; the existing `.venv` has the required dependencies and ran the pipeline.
-  - `pyflakes .` scans `.venv` and reports many third-party warnings; the scoped lint on repository source and tests passed.
-  - Pre-existing local edits in `src/visualize.py`, `flatness.py`, and `views.py` were left untouched and unstaged.
+  - Attempt 2 still registered fewer than 25 images; eight leading images failed. The evaluator's comparison covers 24 shared cameras. COLMAP is a reference model, not laser ground truth.
+  - The pipeline does not print PnP inlier counts for images it could not register; diagnostic file preserves all matching lines involving them and accepted-registration PnP lines.
+  - The system Python lacks OpenCV; the existing `.venv` has the required dependencies.
+  - `pyflakes .` scans `.venv` and reports third-party warnings; scope lint to repository source and tests.
+  - Pre-existing local edits in `src/visualize.py`, `flatness.py`, and `views.py` remain untouched and unstaged.
 - Exact next step: T-012 - capture a 15-30 photo scene dataset with the same camera and no zoom; keep photos out of version control, then run the pipeline and record its measured results.

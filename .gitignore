@@ -7,6 +7,7 @@ output/
 images/
 images_synth/
 images_sb/
+images_sb2/
 south-building/
 images_obj/south-building/
 *.ply

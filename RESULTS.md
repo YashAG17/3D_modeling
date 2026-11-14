@@ -36,7 +36,7 @@ The COLMAP point cloud is also visibly bowl-shaped. That makes the photo capture
 
 ![COLMAP sparse reconstruction from the same desk photos](results/figures/colmap_reconstruction.png)
 
-## South Building (public benchmark)
+## South Building, attempt 1 (every 4th image, 6/32 registered)
 
 Dataset source: [COLMAP datasets page](https://colmap.github.io/datasets.html), which lists 128 images of the South Building at UNC Chapel Hill. The supplied COLMAP sparse model is the reference for this comparison, not laser ground truth.
 
@@ -52,7 +52,23 @@ Measured wall runtime: 177.5 s. The run registered fewer than 25 images, so its 
 | ---: | ---: | ---: |
 | 6 | 0.0215 | 0.38% |
 
-The low percentage describes camera-centre agreement for those six cameras after similarity alignment; it does not measure the accuracy of the reconstructed scene against physical ground truth. To seek broader registration coverage, try every 3rd image or another `--window` value without changing the algorithm.
+The low percentage describes camera-centre agreement for those six cameras after similarity alignment; it does not measure the accuracy of the reconstructed scene against physical ground truth.
+
+## South Building, attempt 2 (every 2nd image from first 64; 24/32 registered)
+
+This run used sorted image indices 0, 2, 4, ..., 62 from the first 64 source images (32 images total), with the same 1333 px focal length and 1600 px maximum image size.
+
+Command: `python run_pipeline.py --images images_sb2 --out out_sb2 --focal 1333 --max_size 1600 --fast --window 6`
+
+Final pipeline line: `Registered 24/32 images, 18898 3D points, mean reprojection error 0.15px, time 516s`
+
+Measured wall runtime: 519.7 s. The eight images that did not register were `P1180141.JPG`, `P1180143.JPG`, `P1180145.JPG`, `P1180147.JPG`, `P1180149.JPG`, `P1180151.JPG`, `P1180153.JPG`, and `P1180155.JPG`.
+
+| Common cameras | Camera-centre RMSE after alignment | RMSE as % of COLMAP scene extent |
+| ---: | ---: | ---: |
+| 24 | 0.0365 | 0.36% |
+
+Full matching and PnP output is saved in `out_sb2/run.log`. `out_sb2/registration_diagnostics.txt` maps input indices to filenames and collects all pairwise matching lines involving the unregistered images, all accepted PnP inlier lines, and the final failed-index list. The pipeline did not emit PnP inlier lines for the images it failed to register. For example, pairs from unregistered indices 2–7 to the first accepted index 8 yielded 10, 11, 11, 55, 28, and 53 inliers respectively; these pair counts alone do not establish the failure cause.
 
 ### Flatness check (desk)
 Plane-fit RMS as % of scene extent: f=960 -> 0.87%, f=1064 -> 0.67%
