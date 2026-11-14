@@ -1,12 +1,9 @@
 # PROGRESS (overwrite this file, do not append)
 - Last updated: 2026-11-14 by Codex
 - Current task: T-012/T-013 remain in progress; both South Building benchmark attempts are recorded.
-- Just completed: Attempt 1 used every 4th sorted image and registered 6/32. Attempt 2 used sorted indices 0, 2, ..., 62 from the first 64 images (32 total), with `--window 6`; it registered 24/32, created 18,898 points, had 0.15 px mean reprojection error, and took 519.7 s wall time (516 s reported by the pipeline). COLMAP comparison found 24 common cameras with 0.0365 camera-centre RMSE, 0.36% of scene extent. The unregistered image names and relevant match/PnP logs are in ignored `out_sb2/registration_diagnostics.txt` and `out_sb2/run.log`. Updated `RESULTS.md` and ignored `images_sb2/`.
-- State of the code: No files in `src/` changed. Outputs are present in ignored `out_sb2/`. `python -m tests.test_geometry`, scoped Pyflakes, and `git diff --check` passed for this attempt.
+- Just completed: Removed the unused `views.py` utility, which only read and wrote hard-coded `output3/` paths and had no references elsewhere. Kept `flatness.py` because it can reproduce the flatness metric documented in `RESULTS.md`.
+- State of the code: The core pipeline and analysis scripts remain in place. No photos or generated output directories were changed.
 - Known issues / gotchas:
-  - Attempt 2 still registered fewer than 25 images; eight leading images failed. The evaluator's comparison covers 24 shared cameras. COLMAP is a reference model, not laser ground truth.
-  - The pipeline does not print PnP inlier counts for images it could not register; diagnostic file preserves all matching lines involving them and accepted-registration PnP lines.
+  - South Building attempt 2 registered 24/32 images; its comparison covers 24 shared cameras. COLMAP is a reference model, not laser ground truth.
   - The system Python lacks OpenCV; the existing `.venv` has the required dependencies.
-  - `pyflakes .` scans `.venv` and reports third-party warnings; scope lint to repository source and tests.
-  - Pre-existing local edits in `src/visualize.py`, `flatness.py`, and `views.py` remain untouched and unstaged.
 - Exact next step: T-012 - capture a 15-30 photo scene dataset with the same camera and no zoom; keep photos out of version control, then run the pipeline and record its measured results.
