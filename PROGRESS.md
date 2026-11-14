@@ -1,14 +1,11 @@
 # PROGRESS (overwrite this file, do not append)
-- Last updated: 2026-11-14 by Claude Sonnet 5.5
-- Current task: none in progress. Milestone 1 (T-001..T-010) complete.
-- Just completed: full pipeline + synthetic tests. Synthetic 7-image room: 7/7 registered, 0.05 px mean
-  reprojection error, camera-centre RMSE 0.0009 (about 0.04% of the 2.4 span) in both own-RANSAC and `--fast` modes.
-- State of the code: WORKS on synthetic data. NOT yet run on real photos. No git repo initialised yet.
-  Tests are plain-assert scripts (`python -m tests.test_geometry`), not pytest.
+- Last updated: 2026-11-14 by Codex
+- Current task: none in progress. Milestone 1 (T-001..T-010) and T-011 are complete.
+- Just completed: converted `tests/test_geometry.py` into two pytest tests covering robust epipolar geometry, pose recovery, triangulation, and bundle adjustment. `python -m pytest` passes (2 tests); `python -m pyflakes .` passes. The GitHub remote was already configured and synchronized before this task; T-011 changes are being committed and pushed.
+- State of the code: WORKS on synthetic data. NOT yet run on real photos. Tests use pytest. Git repository is connected to `https://github.com/YashAG17/3D_modeling`.
 - Known issues / gotchas:
   - Real-photo behaviour untested: focal length is guessed (1.2 x max side) unless `--focal` is given.
   - Own RANSAC is slower than `--fast` (about 9 s vs 6 s on 7 small images; grows quickly with image count).
   - Exhaustive matching is O(n^2) pairs; use `--window` for sequences.
   - Bundle adjustment needs the two-stage (linear then Huber) solve; do not switch back to Huber-only (D-007).
-- Exact next step: T-011 - `git init`, add the remote https://github.com/YashAG17/3D_modeling (currently empty),
-  push, then convert tests/test_geometry.py to pytest.
+- Exact next step: T-012 - capture 2 real datasets (15-30 photos each; one object, one scene), same camera, no zoom. Store photos in `images/` and do not commit them.

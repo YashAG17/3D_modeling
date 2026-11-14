@@ -15,7 +15,7 @@ Format: `- [ ] T-001: <task> - Done when: <check>`
 - [x] T-010: `evaluate_vs_colmap.py` (Umeyama alignment) - Done when: runs on synthetic ground truth, RMSE ~0.001
 
 ## Milestone 2 - Repo, real data, validation
-- [ ] T-011: git init, push to github.com/YashAG17/3D_modeling, convert tests to pytest - Done when: `pytest` passes and repo shows files on GitHub
+- [x] T-011: git init, push to github.com/YashAG17/3D_modeling, convert tests to pytest - Done when: `pytest` passes and repo shows files on GitHub
 - [ ] T-012: Capture 2 real datasets (15-30 photos each; one object, one scene), same camera, no zoom - Done when: photos are in `images/` and not committed
 - [ ] T-013: Run pipeline on real data, record numbers (images registered, #points, mean reproj error, runtime) in RESULTS.md - Done when: RESULTS.md has a table for both datasets
 - [ ] T-014: Run COLMAP on the same photos, run evaluate_vs_colmap.py - Done when: RMSE % of scene extent is in RESULTS.md
