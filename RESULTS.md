@@ -80,6 +80,12 @@ Screenshots of the South Building point cloud viewed in MeshLab:
 
 ![South Building MeshLab view 3](results/figures/south-building-meshlab/meshlab_view_03.png)
 
+### COLMAP reference model
+
+This two-view plot is rendered from the supplied COLMAP `points3D.txt` and `images.txt`; red dots mark the 128 camera centers. Points outside the per-axis 2nd–98th percentile range are omitted for display so distant outliers do not set the plot scale.
+
+![COLMAP South Building reference point cloud and camera centers](results/figures/south-building-meshlab/colmap_reference.png)
+
 ### Flatness check (desk)
 Plane-fit RMS as % of scene extent: f=960 -> 0.87%, f=1064 -> 0.67%
 (COLMAP-estimated focal). Mean reprojection error 0.61 -> 0.50 px,
