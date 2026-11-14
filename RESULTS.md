@@ -35,3 +35,9 @@ COLMAP 4.2.1 was run on the same 19 photos with one shared `SIMPLE_RADIAL` camer
 The COLMAP point cloud is also visibly bowl-shaped. That makes the photo capture pattern a more likely source of the distortion than the fixed-intrinsics camera model alone, though it does not prove the cause. Camera centres from our 960 px run and COLMAP align with RMSE 0.1537, or 1.28% of COLMAP's scene extent (19 common cameras).
 
 ![COLMAP sparse reconstruction from the same desk photos](results/figures/colmap_reconstruction.png)
+
+### Flatness check (desk)
+Plane-fit RMS as % of scene extent: f=960 -> 0.87%, f=1064 -> 0.67%
+(COLMAP-estimated focal). Mean reprojection error 0.61 -> 0.50 px,
+6,436 points, 19/19 registered, 165 s. The point clouds are close to
+planar; the bowl appearance in the 3D plots is largely a viewing effect.
