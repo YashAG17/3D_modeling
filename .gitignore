@@ -6,6 +6,9 @@ venv/
 output/
 images/
 images_synth/
+images_sb/
+south-building/
+images_obj/south-building/
 *.ply
 *.npz
 .DS_Store

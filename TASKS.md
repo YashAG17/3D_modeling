@@ -17,7 +17,7 @@ Format: `- [ ] T-001: <task> - Done when: <check>`
 ## Milestone 2 - Repo, real data, validation
 - [x] T-011: git init, push to github.com/YashAG17/3D_modeling, convert tests to pytest - Done when: `pytest` passes and repo shows files on GitHub
 - [~] T-012: Capture 2 real datasets (15-30 photos each; one object, one scene), same camera, no zoom - Current: 19 desk photos captured; scene dataset pending. Photos are in ignored `images/`.
-- [~] T-013: Run pipeline on real data, record numbers (images registered, #points, mean reproj error, runtime) in RESULTS.md - Current: desk dataset results recorded; second dataset pending.
+- [~] T-013: Run pipeline on real data, record numbers (images registered, #points, mean reproj error, runtime) in RESULTS.md - Current: desk and South Building benchmark runs recorded; the South Building run registered 6/32 images; second captured scene dataset pending.
 - [x] T-014: Run COLMAP on the same photos, run evaluate_vs_colmap.py - Done when: RMSE % of scene extent is in RESULTS.md
 - [ ] T-015: Ablation: own RANSAC vs `--fast`; with vs without bundle adjustment - Done when: table in RESULTS.md
 - [ ] T-016: Fix failures found on real data (thresholds, focal guess, matching window) - Done when: >= 80% images register on both datasets; each change logged in DECISIONS.md
