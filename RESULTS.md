@@ -70,6 +70,16 @@ Measured wall runtime: 519.7 s. The eight images that did not register were `P11
 
 Full matching and PnP output is saved in `out_sb2/run.log`. `out_sb2/registration_diagnostics.txt` maps input indices to filenames and collects all pairwise matching lines involving the unregistered images, all accepted PnP inlier lines, and the final failed-index list. The pipeline did not emit PnP inlier lines for the images it failed to register. For example, pairs from unregistered indices 2–7 to the first accepted index 8 yielded 10, 11, 11, 55, 28, and 53 inliers respectively; these pair counts alone do not establish the failure cause.
 
+### South Building point cloud in MeshLab
+
+Screenshots of the South Building point cloud viewed in MeshLab:
+
+![South Building MeshLab view 1](results/figures/south-building-meshlab/meshlab_view_01.webp)
+
+![South Building MeshLab view 2](results/figures/south-building-meshlab/meshlab_view_02.webp)
+
+![South Building MeshLab view 3](results/figures/south-building-meshlab/meshlab_view_03.png)
+
 ### Flatness check (desk)
 Plane-fit RMS as % of scene extent: f=960 -> 0.87%, f=1064 -> 0.67%
 (COLMAP-estimated focal). Mean reprojection error 0.61 -> 0.50 px,
