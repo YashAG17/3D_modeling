@@ -8,7 +8,7 @@ from scipy.ndimage import maximum_filter, minimum_filter
 
 def extract_sift(gray, n_features=8000):
     """SIFT keypoints + RootSIFT descriptors (L1-normalise then sqrt -> better matching)."""
-    sift = cv2.SIFT_create(nfeatures=n_features)
+    sift = cv2.SIFT_create(nfeatures=n_features, contrastThreshold=0.01)
     kps, desc = sift.detectAndCompute(gray, None)
     if desc is None or len(kps) == 0:
         return np.zeros((0, 2), np.float32), np.zeros((0, 128), np.float32)

@@ -73,7 +73,7 @@ class SfM:
         best = None
         for i, j in pairs:
             m = self.matches[(i, j)]
-            if len(m) < 50:
+            if len(m) < 30:
                 continue
             x1, x2 = self.kps[i][m[:, 0]].astype(np.float64), self.kps[j][m[:, 1]].astype(np.float64)
             F = G.eight_point(x1, x2)
@@ -84,7 +84,7 @@ class SfM:
             if best is None or ok.sum() > best[0]:
                 best = (int(ok.sum()), i, j, R, t / np.linalg.norm(t), X, ok, m)
         self.poses = {}
-        if best is None or best[0] < 50:
+        if best is None or best[0] < 30:
             return False
         n_ok, i, j, R, t, X, ok, m = best
         self.poses = {i: (np.eye(3), np.zeros(3)), j: (R, t)}
